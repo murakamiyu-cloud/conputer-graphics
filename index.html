@@ -38,8 +38,13 @@
       const material = new THREE.MeshStandardMaterial({
         map: texture,
       });
+      
       // メッシュを作成
       const mesh = new THREE.Mesh(geometry, material);
+      const mat = new THREE.SpriteMaterial({transparent:true});
+  
+      const mesh = new THREE.Sprite(mat);
+      mesh.scale.set(width,height,1);
       // 3D空間にメッシュを追加
       scene.add(mesh);
 
