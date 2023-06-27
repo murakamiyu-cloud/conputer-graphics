@@ -31,7 +31,7 @@
 // 角度に応じてカメラの位置を設定
       camera.position.x = 1000 * Math.sin(radian);
       camera.position.z = 1000 * Math.cos(radian);
-      camera.lookAt(new THREE.Vector3(0, 0, 0));
+     
      
 
 
@@ -68,6 +68,7 @@
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         // レンダリング
+         camera.lookAt(new THREE.Vector3(0, 0, 0));
          view.camera.x = 円周の半径 * Math.sin(角度 * Math.PI / 180);
         view.camera.z = 円周の半径 * Math.cos(角度 * Math.PI / 180);
         renderer.render(scene, camera);
