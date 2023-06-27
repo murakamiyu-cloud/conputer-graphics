@@ -28,7 +28,9 @@
       const camera = new THREE.PerspectiveCamera(45, width / height);
       camera.position.set(0, 0, +1000);
 
-      const geometry = new THREE.BoxGeometry( 1, 10, 1 );
+      
+      
+      const geometry = new THREE.BoxGeometry( 50, 150, 50 );
       // 画像を読み込む
       const loader = new THREE.TextureLoader();
       const texture = loader.load("3254.png");
