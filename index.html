@@ -14,6 +14,7 @@
       // サイズを指定
       const width = 960;
       const height = 540;
+      let rot = 0;
 
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
@@ -26,34 +27,30 @@
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height);
-      
-     
 
-
-      
-      
-      const geometry = new THREE.BoxGeometry( 100, 300, 100 );
-      // 画像を読み込む
-      const loader = new THREE.TextureLoader();
-      const texture = loader.load("3254.png");
-      // マテリアルにテクスチャーを設定
-      const material = new THREE.MeshStandardMaterial({
-        map: texture,
-      });
-      
-      // メッシュを作成
-      const mesh = new THREE.Mesh(geometry, material);
-    
-      // 3D空間にメッシュを追加
-      scene.add(mesh);
-
-      // 光源
+      // 平行光源を作成
       const directionalLight = new THREE.DirectionalLight(0xffffff);
       directionalLight.position.set(1, 1, 1);
-      const light = new THREE.AmbientLight(0xFFFFFF, 1.0);
-      scene.add(light);
-      // シーンに追加
       scene.add(directionalLight);
+
+      // マテリアルを作成
+      const material = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load("3254.png"),
+        side: THREE.DoubleSide,
+      });
+
+      // 球体の形状を作成します
+      const geometry = new THREE.BoxGeometry( 100, 300, 100 );
+      // 形状とマテリアルからメッシュを作成します
+      const earthMesh = new THREE.Mesh(geometry, material);
+      // シーンにメッシュを追加します
+      scene.add(earthMesh);
+
+      // 星屑を作成します (カメラの動きをわかりやすくするため)
+      createStarField();
+
+      /** 星屑を作成します */
+     
 
       tick();
 
@@ -67,6 +64,8 @@
         camera.position.z = 1000 * Math.cos(radian);
         // 原点方向を見つめる
         camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        // レンダリング
         renderer.render(scene, camera);
 
         requestAnimationFrame(tick);
